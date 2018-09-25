@@ -1,5 +1,5 @@
 <?php
-
+// connect to data base
 try
 
 {

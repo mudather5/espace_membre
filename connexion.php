@@ -1,3 +1,27 @@
+<?php
+
+include "connect.php";
+
+
+if(isset($_POST['se_connecter']))
+{
+  $pseudo = htmlspecialchars($_POST['pseudo']);
+  $mot_passe = htmlspecialchars($_POST['mot_passe']);
+
+  if(!empty($_POST['pseudo']) AND !empty($_POST['mot_passe']))
+  {
+    $req = $bdd->prepare('SELECT * FROM membre WHERE pseudo = ? AND mot_passe = ?');
+    $req->execute(array($pseudo, $mot_passe));
+  }
+  else
+  {
+    echo"écrire correcte mot de passe";
+  }
+}
+
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -20,12 +44,12 @@
 
   <div class="input">
 
-          <h2>S'inscrire</h2>
+          <h2>Se connecter</h2>
            <form action="" method="post">
-          <p>pseudo:</p>  <input type="text" name="fname"><br>
-          <p>mot de passe: </p>  <input type="password" name="password"><br>
+          <p>pseudo:</p>  <input type="text" name="pseudo"><br>
+          <p>mot de passe: </p>  <input type="password" name="mot_passe"><br>
           <input type="radio" name="" value="Cnnexion-auto"><br>
-                   <input type="submit" value="Se connecter">
+                   <input type="submit" value="Se connecter" name="se_connecter">
           </form>
 </div>
   <script src="js/vendor/modernizr-3.6.0.min.js"></script>

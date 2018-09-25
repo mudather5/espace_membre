@@ -1,24 +1,21 @@
 <?php
 include "connect.php";
-$req = $bdd->query('SELECT * FROM membre');
+$req = $bdd->query('SELECT * FROM membre');//select the table from data base
 if(isset($_POST['inscrire']))
 {
 
-  // if(isset($_POST['pseudo']) AND isset($_POST['mot de passe']) AND isset($_POST['confirm mot de passe']) AND isset($_POST['email']) AND isset($_POST['date_inscripation']))
-  // {
-    if(!empty($_POST['pseudo']) AND !empty($_POST['mot de passe']) AND !empty($_POST['confirm mot de passe']) AND !empty($_POST['email']) AND !empty($_POST['date_inscripation']))
+   // if(isset($_POST['pseudo']) AND isset($_POST['mot_passe']) AND isset($_POST['confirm_password']) AND isset($_POST['email']) AND isset($_POST['inscrire']))
+   // {
+    if(!empty($_POST['pseudo']) AND !empty($_POST['mot_passe']) AND !empty($_POST['confirm_password']) AND !empty($_POST['email']) AND !empty($_POST['inscrire']))
     {
         $pseudo = htmlspecialchars($_POST['pseudo']);
-        $mot_passe  = htmlspecialchars($_POST['mot de passe']);
-        $confirm_mot_de_passe = htmlspecialchars($_POST['confirm mot de passe']);
+        $mot_passe  = htmlspecialchars($_POST['mot_passe']);
+        $confirm_password = htmlspecialchars($_POST['confirm_password']);
         $email = htmlspecialchars($_POST['email']);
-        $date_inscrption = htmlspecialchars($_POST['date_inscripation']);
+        $iscrire = htmlspecialchars($_POST['inscrire']);
 
 
-      $pseudolength = strlen($pseudo);
-      if($pseudolength <= 255)
-      {
-        if($mot_passe == $confirm_mot_de_passe)
+        if($mot_passe == $confirm_password)
         {
               $req = $bdd->prepare('INSERT INTO membre(pseudo, mot_passe, email, date_inscripation) VALUES (:pseudo, :mot_passe, :email, :date_inscripation)');
               $req->execute([
@@ -28,20 +25,21 @@ if(isset($_POST['inscrire']))
               "date_inscripation"=> $date_inscrption
             ]);
         }
-      }
 
 
         else
         {
-          echo "votre mot de passe ne crosponed pas";
+          echo "no";
         }
     }
     else
     {
       echo "vous douvez remplire toutes les champs";
-    }
-  }
 
+    }
+
+  //}
+}
 
 ?>
 
@@ -78,9 +76,9 @@ if(isset($_POST['inscrire']))
 
           <h2>S'inscrire</h2>
            <form action="" method="post">
-          <p>pseudo:</p>  <input type="text" name="fname"><br>
-          <p>mot de passe: </p>  <input type="password" name="password"><br>
-          <p>confirm mot de passe:</p> <input type="password" name="password"><br>
+          <p>pseudo:</p>  <input type="text" name="pseudo"><br>
+          <p>mot de passe: </p>  <input type="password" name="mot_passe"><br>
+          <p>confirm mot de passe:</p> <input type="password" name="comfirm_password"><br>
           <p>e-mail:</p>  <input type="email" name="email"><br>
                    <input type="submit" value="Submit" name="inscrire">
           </form>
