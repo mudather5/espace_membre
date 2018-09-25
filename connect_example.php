@@ -18,6 +18,3 @@ catch(Exception $e)
 
 
 ?>
-$pseudolength = strlen($pseudo);
-if($pseudolength <= 255)
-{
